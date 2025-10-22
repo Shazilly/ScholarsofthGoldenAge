@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Premier League Hall of Fame</title>
+  <style>
+    body {
+      background-color: #111;
+      font-family: Verdana, sans-serif;
+      color: #f5f5f5;
+      margin: 0;
+    }
+    @font-face {
+      font-family: PL; 
+      src: url(Barclays\ PL\ Font.ttf);
+      font-weight: lighter;
+      font-style: normal;
+    }
+    header {
+      background-image: url('HOF/HOF-2.png'); 
+      background-size: cover; 
+      background-repeat: no-repeat; 
+      background-position: center;
+      padding: 50px;
+      background-color: gainsboro;
+    }
+    footer {
+      font-size: xx-small;
+      color: #D2AC47;
+      background-color: #111;
+      font-family: verdana;
+      padding: 8px;
+      text-align: left;
+      margin-top: 20px;
+    }
+    nav {
+      background-color: #111;
+      overflow: hidden;
+    }
+    nav a {
+      float: left;
+      display: block;
+      color:#D2AC47;
+      text-align: center;
+      padding: 10px 20px;
+      text-decoration: none;
+      transition: all 0.1s ease-in-out;
+    }
+    nav a:hover {
+      transform: scale(1.1);
+    }
+    table {
+      margin: 0 auto;
+      border-collapse: separate;
+      border-spacing: 20px;
+    }
+    caption {
+      font-size: 30px;
+      font-weight: bold;
+      margin: 1rem;
+      color: #D2AC47;
+      font-family: PL;
+    }
+    td {
+      vertical-align: top;
+      width: 200px;
+    }
+    .player-cell {
+      position: relative;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .player-cell img {
+      width: 200px;
+      height: 200px;
+      border-radius: 12px;
+      border: 2px solid #ffffff;
+      transition: all 0.3s ease;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto;
+    }
+    .player-cell:hover img {
+      transform: scale(1.05);
+    }
+    .player-name {
+      margin-top: 8px;
+      font-weight: bold;
+      color: #ffffff;
+      font-size: 16px;
+      text-align: center;
+    }
+    .stats-popup {
+      max-height: 0;
+      overflow: hidden;
+      background: #111;
+      border-left: 4px solid #ffffff;
+      border-radius: 0 0 12px 12px;
+      padding: 0 12px;
+      text-align: left;
+      transition: max-height 0.4s ease, padding 0.4s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+      margin-top: 8px;
+    }
+    .stats-popup p {
+      margin: 4px 0;
+      font-size: 14px;
+      color: #ddd;
+    }
+    .stats-popup .player-caption {
+      font-style: italic;
+      color: #D2AC47; 
+      margin-bottom: 6px;
+      font-size: 14px;
+}
+    .player-cell:hover .stats-popup {
+      max-height: 200px;
+      padding: 8px 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header></header>
+
+<nav>
+  <a href="Home.html">Home</a>
+  <a href="History.html">History</a>
+  <a href="Teams.html">Clubs</a>
+  <a href="Team Info.html">Team Info</a>
+  <a href="Hall of Fame.html">Hall of Fame</a>
+  <a href="About.html">About Us</a>
+</nav>
+
+<table>
+    <caption>Legendary Players/Managers</caption>
+  <tr>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Steven Gerrard.png" alt="Steven Gerrard">
+        <div class="player-name">Steven Gerrard</div>
+        <div class="stats-popup">
+          <p class="player-caption">The local lad who conquered the world</p>
+          <p>Appearances: 504</p>
+          <p>Goals: 120</p>
+          <p>Assists: 92</p>
+          <p>Trophies: 0 Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Frank Lampard.png" alt="Frank Lampard">
+        <div class="player-name"">Frank Lampard</div>
+        <div class="stats-popup">
+          <p class="player-caption">The complete midfielder, whose records remain unmatched</p>
+          <p>Appearances: 609</p>
+          <p>Goals: 177</p>
+          <p>Assists: 102</p>
+          <p>Trophies: 3× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Dennis Bergkamp.png" alt="Dennis Bergkamp">
+        <div class="player-name">Dennis Bergkamp</div>
+        <div class="stats-popup">
+          <p class="player-caption">Vision, technique, power - an extraordinary forward who reshaped the game</p>
+          <p>Appearances: 315</p>
+          <p>Goals: 87</p>
+          <p>Assists: 94</p>
+          <p>Trophies: 3× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/David Beckham.png" alt="David Beckham">
+        <div class="player-name">David Beckham</div>
+        <div class="stats-popup">
+          <p class="player-caption">Global icon, footballing sensation - and the greatest ever dead-ball specialist</p>
+          <p>Appearances: 265</p>
+          <p>Goals: 62</p>
+          <p>Assists: 80</p>
+          <p>Trophies: 6× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Roy Keane.png" alt="Roy Keane">
+        <div class="player-name">Roy Keane</div>
+        <div class="stats-popup">
+          <p class="player-caption">The heartbeat of the most successful dynasty in league history</p>
+          <p>Appearances: 366</p>
+          <p>Goals: 39</p>
+          <p>Assists: 33</p>
+          <p>Trophies: 7× Premier League</p>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Eric Cantona.png" alt="Eric Cantona">
+        <div class="player-name">Eric Cantona</div>
+        <div class="stats-popup">
+          <p class="player-caption">Superstar aura, box office performance</p>
+          <p>Appearances: 156</p>
+          <p>Goals: 70</p>
+          <p>Assists: 56</p>
+          <p>Trophies: 4x Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Alan Shearer.png" alt="Alan Shearer">
+        <div class="player-name"">Alan Shearer</div>
+        <div class="stats-popup">
+          <p class="player-caption">The ultimate forward - and all-time record holder</p>
+          <p>Appearances: 441</p>
+          <p>Goals: 260</p>
+          <p>Assists: 64</p>
+          <p>Trophies: 1× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Thierry Henry.png" alt="Thierry Henry">
+        <div class="player-name">Thierry Henry</div>
+        <div class="stats-popup">
+          <p class="player-caption">Captain, talisman, scorer, provider - the man who could make it all look easy</p>
+          <p>Appearances: 258</p>
+          <p>Goals: 175</p>
+          <p>Assists: 74</p>
+          <p>Trophies: 2× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Sergio Aguero.png" alt="Sergio Aguero">
+        <div class="player-name">Sergio Aguero</div>
+        <div class="stats-popup">
+          <p class="player-caption">The most prolific striker in Premier League history</p>
+          <p>Appearances: 275</p>
+          <p>Goals: 184</p>
+          <p>Assists: 47</p>
+          <p>Trophies: 5× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Vincent Kompany.png" alt="Vincent Kompany">
+        <div class="player-name">Vincent Kompany</div>
+        <div class="stats-popup">
+          <p class="player-caption">Manchester City's Captain Fantastic</p>
+          <p>Appearances: 265</p>
+          <p>Goals: 18</p>
+          <p>Assists: 8</p>
+          <p>Trophies: 4× Premier League</p>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Didier Drogba.png" alt="Didier Drogba">
+        <div class="player-name">Didier Drogba</div>
+        <div class="stats-popup">
+          <p class="player-caption">Pace, power, skill - a phenomenon</p>
+          <p>Appearances: 254</p>
+          <p>Goals: 99</p>
+          <p>Assists: 54</p>
+          <p>Trophies: 4x Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Paul Scholes.png" alt="Paul Scholes">
+        <div class="player-name"">Paul Scholes</div>
+        <div class="stats-popup">
+          <p class="player-caption">Visionary genius ranked by his peers as one of the finest to ever play</p>
+          <p>Appearances: 499</p>
+          <p>Goals: 107</p>
+          <p>Assists: 55</p>
+          <p>Trophies: 11× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Peter Schmeichel.png" alt="Peter Schmeichel">
+        <div class="player-name">Peter Schmeichel</div>
+        <div class="stats-popup">
+          <p class="player-caption">Dominant force, decorated captain - one of the world's all-time greats</p>
+          <p>Appearances: 310</p>
+          <p>Clean Sheets: 70</p>
+          <p>Saves Made: 10</p>
+          <p>Trophies: 5× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Ian Wright.png" alt="Ian Wright">
+        <div class="player-name">Ian Wright</div>
+        <div class="stats-popup">
+          <p class="player-caption">From late starter to record breaker</p>
+          <p>Appearances: 213</p>
+          <p>Goals: 113</p>
+          <p>Assists: 22</p>
+          <p>Trophies: 1× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Wayne Rooney.png" alt="Wayne Rooney">
+        <div class="player-name">Wayne Rooney</div>
+        <div class="stats-popup">
+          <p class="player-caption">Teenage sensation to global superstar</p>
+          <p>Appearances: 491</p>
+          <p>Goals: 208</p>
+          <p>Assists: 103</p>
+          <p>Trophies: 5× Premier League</p>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Patrick Vieira.png" alt="Patrick Vieira">
+        <div class="player-name">Patrick Vieira</div>
+        <div class="stats-popup">
+          <p class="player-caption">Power, aggression and skill that reshaped midfielders and produced the 'Invincibles'</p>
+          <p>Appearances: 307</p>
+          <p>Goals: 31</p>
+          <p>Assists: 34</p>
+          <p>Trophies: 3x Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Tony Adams.png" alt="Tony Adams">
+        <div class="player-name"">Tony Adams</div>
+        <div class="stats-popup">
+          <p class="player-caption">Formidable leader, formidable defender - and Arsenal through and through</p>
+          <p>Appearances: 255</p>
+          <p>Goals: 12</p>
+          <p>Assists: 9</p>
+          <p>Trophies: 2× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Petr Cech.png" alt="Petr Cech">
+        <div class="player-name">Petr Cech</div>
+        <div class="stats-popup">
+          <p class="player-caption">One of the finest keepers in history</p>
+          <p>Appearances: 443</p>
+          <p>Clean Sheets: 161</p>
+          <p>Saves Made: 1006</p>
+          <p>Trophies: 5× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Rio Ferdinand.png" alt="Rio Ferdinand">
+        <div class="player-name">Rio Ferdinand</div>
+        <div class="stats-popup">
+          <p class="player-caption"></p>
+          <p>Appearances: 504</p>
+          <p>Goals: 11</p>
+          <p>Assists: 21</p>
+          <p>Trophies: 6× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Arsene Wenger.png" alt="Arsene Wenger">
+        <div class="player-name">Arsene Wenger</div>
+        <div class="stats-popup">
+          <p class="player-caption">Revolutionary genius - on and off the pitch</p>
+          <p>Undefeated Season: 38 league games unbeaten</p>
+          <p>Premier League wins: 714</p>
+          <p>Most Consecutive Top-4 Finishes: (1996–2016)</p>
+          <p>Trophies: 3× Premier League</p>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Sir Alex Ferguson.png" alt="Sir Alex Ferguson">
+        <div class="player-name">Sir Alex Ferguson</div>
+        <div class="stats-popup">
+          <p class="player-caption">The most successful manager in British football history</p>
+          <p>Treble Achievement: 1998–99</p>
+          <p>Total Premier League Wins: 528</p>
+          <p>Unbeaten Home Seasons: 8</p>
+          <p>Trophies: 13x Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/John Terry.png" alt="John Terry">
+        <div class="player-name"">John Terry</div>
+        <div class="stats-popup">
+          <p class="player-caption">Captain, Leader, Legend</p>
+          <p>Appearances: 492</p>
+          <p>Goals: 41</p>
+          <p>Assists:9</p>
+          <p>Trophies: 5× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Andrew Cole.png" alt="Andrew Cole">
+        <div class="player-name">Andrew Cole</div>
+        <div class="stats-popup">
+          <p class="player-caption">One of the greatest goalscorers ever seen</p>
+          <p>Appearances: 414</p>
+          <p>Goals: 187</p>
+          <p>Assists: 73</p>
+          <p>Trophies: 1× Premier League</p>
+        </div>
+      </div>
+    </td>
+    <td>
+      <div class="player-cell">
+        <img src="HOF/Ashley Cole.png" alt="Ashley Cole">
+        <div class="player-name">Ashley Cole</div>
+        <div class="stats-popup">
+          <p class="player-caption">Defined the evolution of the modern full-back</p>
+          <p>Appearances: 385</p>
+          <p>Goals: 8</p>
+          <p>Assists: 31</p>
+          <p>Trophies: 4× Premier League</p>
+        </div>
+      </div>
+    </td>
+  </tr>
+</table>
+<br>
+<br>
+<br>
+
+<footer><p>The Premier League Story</p></footer>
+
+</body>
+</html>
+

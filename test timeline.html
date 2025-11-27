@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scholars of the Golden Age - Timeline</title>
+    <script type="module">
+        import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'dark',
+            gantt: {
+                barHeight: 24,
+                barGap: 6,
+                fontSize: 14,
+                sectionFontSize: 16,
+                numberSectionStyles: 4,
+                axisFormat: '%Y'
+            }
+        });
+    </script>
+    <style>
+        body {
+            background-color: #111;
+            font-family: Verdana, sans-serif;
+            color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background: linear-gradient(135deg, #AA771C 0%, #FCF6BA 50%, #AA771C 100%);
+            color: #000000;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            text-align: center;
+            font-family: 'Arabic Typesetting', serif;
+            font-size: 2.5em;
+            border-bottom: 3px solid #8B6914;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M20 0l20 20-20 20L0 20z" fill="%23ffffff10"/></svg>');
+            opacity: 0.1;
+        }
+        nav {
+            background-color: #111;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: #D2AC47;
+            text-align: center;
+            padding: 10px 20px;
+            text-decoration: none;
+            transition: all 0.1s ease-in-out;
+        }
+        nav a:hover {
+            transform: scale(1.1);
+        }
+        .container {
+            background: #111;
+            padding: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #D2AC47;
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 2.2em;
+            font-weight: 700;
+            border-bottom: 2px solid #AA771C;
+            padding-bottom: 15px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .mermaid {
+            margin: 30px 0;
+            background: #1a1a1a;
+            padding: 25px;
+            border-radius: 8px;
+            border: 1px solid #AA771C;
+            box-shadow: 0 4px 15px rgba(170, 119, 28, 0.2);
+        }
+        /* Custom styles for the Gantt chart */
+        .mermaid .sectionTitle {
+            font-weight: 700 !important;
+            font-size: 16px !important;
+            fill: #FCF6BA !important;
+        }
+        .mermaid .taskText {
+            font-weight: 600 !important;
+            font-size: 13px !important;
+            fill: #f5f5f5 !important;
+        }
+        .mermaid .today {
+            stroke: #D2AC47 !important;
+            stroke-width: 3px !important;
+        }
+        .scholar-list {
+            margin-top: 50px;
+            background: #1a1a1a;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #AA771C;
+        }
+        .scholar-list h2 {
+            color: #D2AC47;
+            border-bottom: 2px solid #AA771C;
+            padding-bottom: 10px;
+            margin-bottom: 25px;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        .scholar-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #333;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            color: #f5f5f5;
+        }
+        .scholar-item:hover {
+            background-color: #2a2a2a;
+            padding-left: 10px;
+            border-radius: 5px;
+        }
+        .scholar-item strong {
+            color: #FCF6BA;
+            font-weight: 700;
+        }
+        .century {
+            background: linear-gradient(135deg, #AA771C, #8B6914);
+            color: #000;
+            padding: 15px;
+            margin: 25px 0 15px 0;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 18px;
+            box-shadow: 0 3px 10px rgba(170, 119, 28, 0.4);
+            text-shadow: 1px 1px 1px rgba(255,255,255,0.3);
+        }
+        .footnote {
+            margin-top: 30px;
+            padding: 15px;
+            background: #2a2a2a;
+            border-left: 4px solid #D2AC47;
+            border-radius: 5px;
+            font-style: italic;
+            color: #f5f5f5;
+        }
+        footer {
+            font-size: 6px;
+            color: #D2AC47;
+            background-color: #111;
+            font-family: verdana;
+            padding: 8px;
+            text-align: left;
+            margin-top: 20px;
+            border-top: 1px solid #333;
+        }
+    </style>
+</head>
+<body>
+    <header>Scholars of the Islamic Golden Age</header>
+    
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="test timeline.html">Timeline</a>
+    </nav>
+
+    <div class="container">
+        <h1>Chronological Timeline of Scholars</h1>
+        
+        <div class="mermaid">
+gantt
+    title Islamic Golden Age Scholars by Birth Year
+    dateFormat  YYYY
+    axisFormat  %Y
+
+    section Early Golden Age (8th - 9th Century)
+    Jabir ibn Hayyan (c. 721) :crit, 721, 65y
+    Al-Khwarizmi (c. 780) :crit, 780, 70y
+    Al-Kindi (c. 801) :crit, 801, 70y
+    Abbas ibn Firnas (c. 810) :crit, 810, 67y
+    Hunayn ibn Ishaq (c. 808) :crit, 808, 65y
+    Fatima al-Fihri (c. 800) :crit, 800, 80y
+    Al-Farabi (c. 872) :crit, 872, 78y
+    Abu al-Qasim al-Zahrawi (c. 936) :crit, 936, 75y
+    Al-Biruni (c. 973) :crit, 973, 75y
+    Ibn Sina (Avicenna) (c. 980) :crit, 980, 57y
+
+    section Central Golden Age (10th - 12th Century)
+    Alhazen (c. 965) :active, 965, 69y
+    Abu Bakr Al-Razi (c. 865) :active, 865, 75y
+    Omar Khayyam (c. 1048) :active, 1048, 75y
+    Ismail al-Jazari (c. 1136) :active, 1136, 70y
+    Ibn Rushd (c. 1126) :active, 1126, 66y
+    Ibn al-Nafis (c. 1213) :active, 1213, 77y
+
+    section Late Golden Age (12th - 14th Century)
+    Sutayta Al-mahamali (c. 950) :done, 950, 70y
+    Mariam al-Ijliya (c. 950) :done, 950, 70y
+    Yahya ibn Adi (c. 893) :done, 893, 67y
+    Ibn Khaldun (c. 1332) :done, 1332, 64y
+        </div>
+        <div class="footnote">
+            <strong>Note:</strong> The timeline shows scholars in chronological order by birth year. Different colors on the chart represent different periods of the Islamic Golden Age (750 AD-1492 AD).
+        </div>
+
+        <div class="scholar-list">
+            <h2>Detailed Chronological List</h2>
+            
+            <div class="century">8th - 9th Century (Early Golden Age)</div>
+            <div class="scholar-item">1. <strong>Jabir ibn Hayyan</strong> (c. 721 – c. 815) - Father of early chemistry, alchemy</div>
+            <div class="scholar-item">2. <strong>Fatima al-Fihri</strong> (c. 800 – c. 880) - Founder of University of al-Qarawiyyin</div>
+            <div class="scholar-item">3. <strong>Al-Khwarizmi</strong> (c. 780 – c. 850) - Mathematics, Algebra, Algorithms</div>
+            <div class="scholar-item">4. <strong>Hunayn ibn Ishaq</strong> (c. 808 – 873) - Medicine, Translation</div>
+            <div class="scholar-item">5. <strong>Al-Kindi</strong> (c. 801 – 873) - Philosophy, Cryptography, Medicine</div>
+            <div class="scholar-item">6. <strong>Abbas ibn Firnas</strong> (c. 810 – 887) - Engineering, Aviation pioneer</div>
+            <div class="scholar-item">7. <strong>Abu Bakr Al-Razi</strong> (c. 865 – c. 925) - Medicine, Chemistry, Philosophy</div>
+            <div class="scholar-item">8. <strong>Al-Farabi</strong> (c. 872 – c. 950) - Philosophy, Political science, Logic</div>
+            <div class="scholar-item">9. <strong>Yahya ibn Adi</strong> (c. 893 – 974) - Philosophy, Logic, Translation</div>
+
+            <div class="century">10th Century</div>
+            <div class="scholar-item">10. <strong>Sutayta Al-mahamali</strong> (10th century) - Mathematics, Algebra</div>
+            <div class="scholar-item">11. <strong>Mariam al-Ijliya</strong> (10th century) - Astronomy, Instrument design</div>
+            <div class="scholar-item">12. <strong>Abu al-Qasim al-Zahrawi</strong> (c. 936 – c. 1013) - Surgery, Medical instruments</div>
+
+            <div class="century">10th - 11th Century (Peak Period)</div>
+            <div class="scholar-item">13. <strong>Al-Biruni</strong> (c. 973 – c. 1050) - Astronomy, History, Anthropology</div>
+            <div class="scholar-item">14. <strong>Ibn Sina (Avicenna)</strong> (c. 980 – 1037) - Medicine, Philosophy, Science</div>
+            <div class="scholar-item">15. <strong>Alhazen (Ibn al-Haytham)</strong> (c. 965 – c. 1040) - Optics, Scientific method</div>
+
+            <div class="century">11th - 14th Century (Later Period)</div>
+            <div class="scholar-item">16. <strong>Omar Khayyam</strong> (c. 1048 – 1131) - Mathematics, Astronomy, Poetry</div>
+            <div class="scholar-item">17. <strong>Ibn Rushd</strong> (1126 – 1198) - Philosophy, Law, Medicine</div>
+            <div class="scholar-item">18. <strong>Ismail al-Jazari</strong> (c. 1136 – 1206) - Engineering, Robotics, Automation</div>
+            <div class="scholar-item">19. <strong>Ibn al-Nafis</strong> (c. 1213 – 1288) - Medicine, Pulmonary circulation</div>
+            <div class="scholar-item">20. <strong>Ibn Khaldun</strong> (1332 – 1406) - Historiography, Sociology, Economics</div>
+        </div>
+
+        
+    </div>
+
+    <footer>
+        <p>Developed by: Sameehaa Gathoo, Ilhaam Rauff, Zayan Ismail, Hamzah Abrahams, Muhammed Pochee, Zahra Bhamjee, Muhammad Bhamjee, Zayd Mayet & Muallimah Shaz</p>
+    </footer>
+</body>
+</html>

@@ -66,7 +66,6 @@
       font-weight: bold;
       margin: 1rem;
       color: #D2AC47;
-      font-family: PL;
     }
     td {
       vertical-align: top;
@@ -83,11 +82,12 @@
   position: relative;
   cursor: pointer;
   transition: all 0.3s ease;
-  max-height: 500px;
-  overflow-y: auto;
+  max-height: none;
+  /* overflow-y: auto; */
   padding-right: 8px;
 }
 
+/*
 .scholar-cell::-webkit-scrollbar {
   width: 6px;
 }
@@ -105,6 +105,7 @@
 .scholar-cell::-webkit-scrollbar-thumb:hover {
   background: #FCF6BA;
 } 
+*/
     .scholar-cell img {
       width: 200px;
       height: 200px;
@@ -147,9 +148,10 @@
       color: #D2AC47; 
       margin-bottom: 6px;
       font-size: 14px;
+      text-align: center;
     }
     .scholar-cell:hover .stats-popup {
-      max-height: 300px;
+      max-height: 10000px;
       padding: 12px 12px;
     }
     .stats-popup a {
@@ -479,7 +481,7 @@
         <img src="Alhazen.png" alt="Alhazen (Ibn al-Haytham)">
         <div class="scholar-name">Alhazen (Ibn al-Haytham)</div>
         <div class="stats-popup">
-          <p class="scholar-caption">Optics and the development of the scientific method. His work profoundly influenced both Islamic and Western science. Authored the influential "Book of Optics" (Kitab al-Manazir); pioneering experimental scientific method; major advances in vision science and mathematics</p>
+          <p class="scholar-caption">Authored the influential "Book of Optics" (Kitab al-Manazir); pioneering experimental scientific method; major advances in vision science and mathematics</p>
           <p>Lived between: 965–c. 1040/1041 CE</p>
           <p>No. of books written: Attributed with over 200 works; about 96 known, 50 extant, 14 on optics</p>
           <p>Contributions to: Optics, mathematics, astronomy, physics, philosophy, medicine, engineering, psychology</p>
@@ -494,7 +496,7 @@
         <div class="stats-popup">
           <p class="scholar-caption">Foundational Thinker in Sociology, History, and Economics</p>
           <p>Lived between: 1332–1406 CE (1 Ramadan 732 AH – 25 Ramadan 808 AH)</p>
-          <p>No. of books written: Major works: "al-Muqaddimah" (introduction to "Kitab al-‘Ibar"), "al-Ta‘rif", "Lubab al-Muhashshal fi Usul al-Din", and others; total number is debated, but his main legacy is the Muqaddimah and its associated volumes</p>
+          <p>No. of books written:5–6 distinct works securely attributed to him.</p>
           <p>Contributions to: Sociology, History, Economics, Political science, Philosophy, Education, Communication, Historiography, Religious studies</p>
           <p>Further information: <a href="https://en.wikipedia.org/wiki/Ibn_Khaldun" target="_blank" rel="noopener noreferrer">Here</a> </p>
         </div>
@@ -507,4 +509,3 @@
 
 </body>
 </html>
-

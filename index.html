@@ -2,6 +2,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <title>Scholars of the Golden Age</title>
   <style>
     body {
@@ -43,11 +44,15 @@
     nav {
       background-color: #111;
       overflow: hidden;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 20px;
     }
     nav a {
       float: left;
       display: block;
-      color:#D2AC47;
+      color: #D2AC47;
       text-align: center;
       padding: 10px 20px;
       text-decoration: none;
@@ -158,6 +163,221 @@
       color: #D2AC47; 
       text-decoration: underline;
     }
+    .stats-popup p:not(.scholar-caption) {
+      display: none;
+    }
+    .search-container {
+      display: flex;
+      align-items: center;
+    }
+    
+    .search-box {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(210, 172, 71, 0.3);
+      border-radius: 20px;
+      padding: 8px 15px;
+      color: white;
+      width: 200px;
+      transition: all 0.3s ease;
+      font-family: Verdana, sans-serif;
+    }
+    
+    .search-box:focus {
+      outline: none;
+      width: 250px;
+      border-color: #D2AC47;
+    }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.85);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+    
+    .modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    
+    .modal-content {
+      background-color: #1a1a1a;
+      width: 90%;
+      max-width: 800px;
+      max-height: 90vh;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+      border: 2px solid #D2AC47;
+      position: relative;
+      transform: translateY(30px);
+      transition: transform 0.4s ease;
+    }
+    
+    .modal-overlay.active .modal-content {
+      transform: translateY(0);
+    }
+    
+    .modal-close {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background-color: rgba(0, 0, 0, 0.7);
+      color: white;
+      border: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    .modal-close:hover {
+      background-color: #D2AC47;
+      color: black;
+    }
+    
+    .modal-body {
+      padding: 30px;
+      overflow-y: auto;
+      max-height: calc(90vh - 100px);
+      color: #f5f5f5;
+    }
+    
+    .modal-header {
+      display: flex;
+      gap: 25px;
+      margin-bottom: 25px;
+      align-items: flex-start;
+    }
+    
+    .modal-image {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 3px solid #D2AC47;
+      flex-shrink: 0;
+    }
+    
+    .modal-title {
+      font-size: 2rem;
+      color: white;
+      margin-bottom: 10px;
+    }
+    
+    .modal-subtitle {
+      color: #D2AC47;
+      font-size: 1.1rem;
+      margin-bottom: 15px;
+      font-weight: 600;
+    }
+    
+    .modal-text {
+      color: #f5f5f5;
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    
+    .modal-contributions {
+      margin-top: 25px;
+    }
+    
+    .modal-contributions h3 {
+      color: #D2AC47;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+    
+    .contributions-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    
+    .contribution-item {
+      background-color: rgba(210, 172, 71, 0.15);
+      padding: 10px 15px;
+      border-radius: 8px;
+      color: #FCF6BA;
+      font-weight: 500;
+    }
+    .filter-controls {
+      max-width: 1200px;
+      margin: 30px auto;
+      padding: 0 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: center;
+    }
+    
+    .filter-btn {
+      background-color: transparent;
+      color: #f5f5f5;
+      border: 1px solid rgba(210, 172, 71, 0.3);
+      padding: 10px 20px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-family: Verdana, sans-serif;
+    }
+    
+    .filter-btn:hover, .filter-btn.active {
+      background-color: #D2AC47;
+      color: black;
+      border-color: #D2AC47;
+    }
+    /* Timeline hover effects */
+.timeline-marker:hover {
+  transform: translateX(-50%) scale(1.2) !important;
+  background-color: #FCF6BA !important;
+}
+
+.timeline-marker:hover span:first-child {
+  opacity: 1 !important;
+}
+
+.timeline-marker:hover .timeline-hover-message {
+  opacity: 1 !important;
+  visibility: visible !important;
+  bottom: 30px !important;
+}
+
+/* Responsive timeline */
+@media (max-width: 768px) {
+  .timeline-hover-message {
+    width: 150px !important;
+    font-size: 0.7rem !important;
+    padding: 6px !important;
+    bottom: 20px !important;
+  }
+  
+  .timeline-marker {
+    width: 14px !important;
+    height: 14px !important;
+  }
+  
+  .timeline-marker span {
+    font-size: 0.65rem !important;
+    padding: 2px 4px !important;
+  }
+}
     @media (max-width: 768px) {
   body {
     margin: 10px;
@@ -193,15 +413,45 @@
 }
 
 /* For tablets (screens 769px to 1024px) */
-@media (max-width: 1024px) {
-  table {
-    border-spacing: 15px;
-  }
-
-  td {
-    width: 150px;
-  }
-}
+@media (max-width: 768px) {
+      body {
+        margin: 10px;
+      }
+      header {
+        padding: 20px;
+        font-size: 1.5em;
+      }
+      table {
+        border-spacing: 10px;
+      }
+      td {
+        width: 100%;
+        display: block;
+        margin-bottom: 20px;
+      }
+      .scholar-cell img {
+        width: 100%;
+        max-width: 200px;
+      }
+      nav a {
+        padding: 8px 10px;
+        font-size: 12px;
+      }
+      .search-box {
+        width: 150px;
+      }
+      .search-box:focus {
+        width: 180px;
+      }
+      .modal-header {
+        flex-direction: column;
+      }
+      .modal-image {
+        width: 150px;
+        height: 150px;
+        align-self: center;
+      }
+    }
 
   </style>
 </head>
@@ -211,301 +461,695 @@
 <header>Scholars of the Islamic Golden Age</header>
 
 <nav>
-  
-  <!----
-  <a href="History.html">History</a>
-  <a href="Teams.html">Clubs</a>
-  <a href="Team Info.html">Team Info</a>
-  <a href="Hall of Fame.html">Hall of Fame</a>
-  <a href="About.html">About Us</a> 
-  -->
+    <div style="display: flex;">
+      <a href="index.html">Home</a>
+      <a href="test timeline.html">Timeline</a>
+    </div>
+    <div class="search-container">
+      <input type="text" class="search-box" id="search-box" placeholder="Search scholars...">
+      <i class="fas fa-search" style="color: #D2AC47; margin-left: -30px;"></i>
+    </div>
+  </nav>
 
-  <a href="index.html">Home</a>
-  <a href="test timeline.html">Timeline</a>
-</nav>
+<div class="timeline-container" style="max-width: 1000px; margin: 20px auto 15px; padding: 0 20px; position: relative;">
+  <div style="text-align: center; margin-bottom: 10px;">
+    <span style="color: #D2AC47; font-size: 1rem; font-weight: bold;"></span>
+  </div>
+  <div style="height: 6px; background: linear-gradient(90deg, #AA771C, #FCF6BA, #AA771C); border-radius: 4px; margin: 15px 0 20px; position: relative;">
+    
+    <!-- 8th Century Marker -->
+    <div class="timeline-marker" style="position: absolute; top: -5px; left: 10%; width: 16px; height: 16px; background-color: #D2AC47; border-radius: 50%; cursor: pointer; transform: translateX(-50%); transition: all 0.3s ease; border: 2px solid #111; box-shadow: 0 0 8px rgba(210, 172, 71, 0.7);" data-century="8th">
+      <span style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.75rem; color: #FCF6BA; background-color: rgba(0, 0, 0, 0.7); padding: 2px 6px; border-radius: 4px; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; z-index: 20;">8th C</span>
+      <div class="timeline-hover-message" style="position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #AA771C, #D2AC47); color: #000; padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: bold; width: 180px; white-space: normal; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); border: 1px solid #FCF6BA; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 100; pointer-events: none;">
+        <strong>✨ 8th Century</strong>
+        <span style="display: block; font-size: 0.7rem; color: #333; margin-top: 4px; font-weight: normal; line-height: 1.3;">House of Wisdom</span>
+        <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: #D2AC47 transparent transparent transparent;"></div>
+      </div>
+    </div>
+    
+    <!-- 9th-10th Century Marker -->
+    <div class="timeline-marker" style="position: absolute; top: -5px; left: 30%; width: 16px; height: 16px; background-color: #D2AC47; border-radius: 50%; cursor: pointer; transform: translateX(-50%); transition: all 0.3s ease; border: 2px solid #111; box-shadow: 0 0 8px rgba(210, 172, 71, 0.7);" data-century="9th-10th">
+      <span style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.75rem; color: #FCF6BA; background-color: rgba(0, 0, 0, 0.7); padding: 2px 6px; border-radius: 4px; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; z-index: 20;">9th-10th C</span>
+      <div class="timeline-hover-message" style="position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #AA771C, #D2AC47); color: #000; padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: bold; width: 180px; white-space: normal; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); border: 1px solid #FCF6BA; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 100; pointer-events: none;">
+        <strong>📚 9th-10th Century</strong>
+        <span style="display: block; font-size: 0.7rem; color: #333; margin-top: 4px; font-weight: normal; line-height: 1.3;">Al-Khwarizmi • Al-Razi • Translation Movement</span>
+        <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: #D2AC47 transparent transparent transparent;"></div>
+      </div>
+    </div>
+    
+    <!-- 11th Century Marker -->
+    <div class="timeline-marker" style="position: absolute; top: -5px; left: 50%; width: 16px; height: 16px; background-color: #D2AC47; border-radius: 50%; cursor: pointer; transform: translateX(-50%); transition: all 0.3s ease; border: 2px solid #111; box-shadow: 0 0 8px rgba(210, 172, 71, 0.7);" data-century="11th">
+      <span style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.75rem; color: #FCF6BA; background-color: rgba(0, 0, 0, 0.7); padding: 2px 6px; border-radius: 4px; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; z-index: 20;">11th C</span>
+      <div class="timeline-hover-message" style="position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #AA771C, #D2AC47); color: #000; padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: bold; width: 180px; white-space: normal; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); border: 1px solid #FCF6BA; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 100; pointer-events: none;">
+        <strong>🔬 11th Century</strong>
+        <span style="display: block; font-size: 0.7rem; color: #333; margin-top: 4px; font-weight: normal; line-height: 1.3;">Ibn Sina • Al-Biruni • Alhazen</span>
+        <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: #D2AC47 transparent transparent transparent;"></div>
+      </div>
+    </div>
+    
+    <!-- 12th-13th Century Marker -->
+    <div class="timeline-marker" style="position: absolute; top: -5px; left: 70%; width: 16px; height: 16px; background-color: #D2AC47; border-radius: 50%; cursor: pointer; transform: translateX(-50%); transition: all 0.3s ease; border: 2px solid #111; box-shadow: 0 0 8px rgba(210, 172, 71, 0.7);" data-century="12th-13th">
+      <span style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.75rem; color: #FCF6BA; background-color: rgba(0, 0, 0, 0.7); padding: 2px 6px; border-radius: 4px; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; z-index: 20;">12th-13th C</span>
+      <div class="timeline-hover-message" style="position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #AA771C, #D2AC47); color: #000; padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: bold; width: 180px; white-space: normal; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); border: 1px solid #FCF6BA; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 100; pointer-events: none;">
+        <strong>⚙️ 12th-13th Century</strong>
+        <span style="display: block; font-size: 0.7rem; color: #333; margin-top: 4px; font-weight: normal; line-height: 1.3;">Al-Jazari • Ibn al-Nafis • Universities</span>
+        <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: #D2AC47 transparent transparent transparent;"></div>
+      </div>
+    </div>
+    
+    <!-- 14th-15th Century Marker -->
+    <div class="timeline-marker" style="position: absolute; top: -5px; left: 90%; width: 16px; height: 16px; background-color: #D2AC47; border-radius: 50%; cursor: pointer; transform: translateX(-50%); transition: all 0.3s ease; border: 2px solid #111; box-shadow: 0 0 8px rgba(210, 172, 71, 0.7);" data-century="14th-15th">
+      <span style="position: absolute; top: 20px; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: 0.75rem; color: #FCF6BA; background-color: rgba(0, 0, 0, 0.7); padding: 2px 6px; border-radius: 4px; opacity: 0; transition: opacity 0.3s ease; pointer-events: none; z-index: 20;">14th-15th C</span>
+      <div class="timeline-hover-message" style="position: absolute; bottom: 25px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, #AA771C, #D2AC47); color: #000; padding: 8px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: bold; width: 180px; white-space: normal; text-align: center; box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5); border: 1px solid #FCF6BA; opacity: 0; visibility: hidden; transition: all 0.3s ease; z-index: 100; pointer-events: none;">
+        <strong>📖 14th-15th Century</strong>
+        <span style="display: block; font-size: 0.7rem; color: #333; margin-top: 4px; font-weight: normal; line-height: 1.3;">Ibn Khaldun • End of Golden Age</span>
+        <div style="position: absolute; top: 100%; left: 50%; transform: translateX(-50%); border-width: 6px; border-style: solid; border-color: #D2AC47 transparent transparent transparent;"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
-<table>
-    <caption>750 AD-1492 AD</caption>
-  <tr>
-    <td>
-      <div class="scholar-cell">
-        <img src="Fatima al Fihri.png" alt="Fatima al Fihri">
-        <div class="scholar-name">Fatima al-Fihri</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Fatima al-Fihri is the founder of the world's first university Al-Qarawiyyin university.</p>
-          <p>Lived between: 800-880 CE</p>
-          <p>Known as: "Umm Al-Banayn" ("Mother of Sons")</p>
-          <p>Contributions: Mathematics</p>
-          <p>Further information: <a href="https://www.muslimwomenmathematicians.org/" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Abbas ibn Firnas.png" alt="Abbas ibn Firnas">
-        <div class="scholar-name">Abbas ibn Firnas</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Early aviation experiments (glider flight), invention, scientific instruments, and mechanical devices</p>
-          <p>Lived between: 810–887 CE</p>
-          <p>Known as: "The father of Aviation"</p>
-          <p>Contributions: Engineering, Physics, Astronomy, Chemistry, Music, Poetry, Glassmaking and Mechanics</p>
-          <p>Further information: <a href="https://en.wikipedia.org/wiki/Abbas_ibn_Firnas" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Al Khwarizmi.png" alt="Al Khwarizmi">
-        <div class="scholar-name">Al Khwarizm</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">"The father of algebra".He is most famous for Founding algebra, developing algorithms and introducing Hindu-Arabic numerals.</p>
-          <p>Lived between: 780–850 CE</p>
-          <p>No. of books written: 9</p>
-          <p>Contributions to: Mathematics, Astronomy, Geography and Pedagogy</p>
-          <p>Further information: <a href="https://mathshistory.st-andrews.ac.uk/Biographies/Al-Khwarizmi/" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Abu Bakr Al razi.png" alt="Abu Bakr Al-razi">
-        <div class="scholar-name">Abu Bakr Muhammad ibn Zakariya al-Razi</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Abu Bakr Al-razi is known for distinguishing smallpox from measles, founding the first psychiatric ward, medical encyclopedias and innovations in chemistry and medicine.</p>
-          <p>Lived between: 865–925 CE</p>
-          <p>No. of books written: estimates from 184-237</p>
-          <p>Contributions to: Medicine, Chemistry, Philosophy, Psychiatry, Mathematics, Astronomy, Music and Ethics</p>
-          <p>Further information: <a href="https://en.wikipedia.org/wiki/Abu_Bakr_al-Razi" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Sulaymaan Al Kindi.png" alt="Sulaymaan Al Kindi">
-        <div class="scholar-name">Sulayman Al Kindi</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Al-Kindi is celebrated as the first major Arab philosopher and a pioneering polymath and is also known as the "Philosopher of the Arabs"</p>
-          <p>Lived between: 801–873 CE</p>
-          <p>No. of books written: Over 270</p>
-          <p>Contributions to: Philosophy, Logic, Mathematics, Medicine, Astronomy, Physics, Chemistry, Music, Optics, Psychology, Meteorology, Pharmacology, Politics, Ethics and Education</p>
-          <p>Further information: <a href="https://en.wikipedia.org/wiki/Al-Kindi" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-  </tr>
-</table>
+<div class="filter-controls">
+    <button class="filter-btn active" data-filter="all">All Scholars</button>
+    <button class="filter-btn" data-filter="medicine">Medicine</button>
+    <button class="filter-btn" data-filter="mathematics">Mathematics</button>
+    <button class="filter-btn" data-filter="astronomy">Astronomy</button>
+    <button class="filter-btn" data-filter="philosophy">Philosophy</button>
+    <button class="filter-btn" data-filter="engineering">Engineering</button>
+    <button class="filter-btn" data-filter="chemistry">Chemistry</button>
+  </div>
 
-<table>
-  <tr>
-    <td>
-      <div class="scholar-cell">
-        <img src="Al Farabi.png" alt="al-Farabi">
-        <div class="scholar-name">Al-Farabi</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Al-Farabi had great influence on science and philosophy for several centuries, and was widely considered second only to Aristotle in knowledge.</p>
-          <p>Lived between: 870-950 CE</p>
-          <p>No. of books written: 72</p>
-          <p>Contributions to: Enumeration of the Sciences, Language, Logic, Mathematics, Music, Physics, Metaphysics, Ethics and Politics</p>
-          <p>Further information: <a href="https://plato.stanford.edu/entries/al-farabi/" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Ismail al jazari.png" alt="Ismail al-Jazari">
-        <div class="scholar-name">Ismail al-Jazari</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Ismail al-Jazari is celebrated as one of the most influential engineers and inventors of the medieval Islamic world, particularly known for his pioneering work in mechanical engineering, robotics, and automation.</p>
-          <p>Lived between: 1136–1206 CE</p>
-          <p>No. of books written: 1</p>
-          <p>Contributions to: Mechanical engineering, Robotics, Hydraulics, Automata, Fluid mechanics, Control systems, and Cybernetics</p>
-          <p>Further information: <a href="https://en.wikipedia.org/wiki/Al-Jazari" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Ibn al Nafis.png" alt="Ibn al-Nafis">
-        <div class="scholar-name">Ibn al-Nafis</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Ibn al-Nafis is known for discovering the pulmonary circulation of blood.</p>
-          <p>Lived between: 1210–1288 CE</p>
-          <p>No. of books written: 110</p>
-          <p>Contributions to: Medicine, Anatomy, Physiology, Philosophy and Islamic law</p>
-          <p>Further information: <a href="https://muslimheritage.com/people/scholars/ibn-al-nafis-2/" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Yahya ibn Adi.png" alt="Yahya ibn Adi">
-        <div class="scholar-name">Yahya ibn Adi</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Yahya ibn ʿAdi was a leading Christian philosopher, translator, and logician known for his influential works on philosophy, ethics, and the transmission of Greek thought into Arabic.</p>
-          <p>Lived between: 893–974 CE</p>
-          <p>No. of books written: 20–25</p>
-          <p>Contributions to: Philosophy, Logic, Theology, Translation movement and Intellectual education</p>
-          <p>Further information: <a href="https://plato.stanford.edu/entries/yahya-adi/" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Omar Khayyam.png" alt="Omar Khayyam">
-        <div class="scholar-name">Omar Khayyam</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Omar Khayyam was a renowned Persian mathematician and astronomer, famous for his work on cubic equations and calendar reform and  celebrated for his philosophical poetry.</p>
-          <p>Lived between:  1048-1131</p>
-          <p>No. of books written: 10-15</p>
-          <p>Contributions to: Mathematics, Astronomy, Philosophy and Poetry </p>
-          <p>Further information: <a href="https://www.britannica.com/biography/Omar-Khayyam-Persian-poet-and-astronomer" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-  </tr>
-</table>
+<div id="scholars-tables-container"></div>
 
-<table>
-  <tr>
-    <td>
-      <div class="scholar-cell">
-        <img src="Mariam al Ijliya.png" alt="Mariam al-Ijliya">
-        <div class="scholar-name">Mariam al-Ijliya</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Mariam al-Ijliya was a pioneering instrument maker, famed for crafting intricate astrolabes and breaking gender barriers in medieval science. </p>
-          <p>Lived between: 910-unknown</p>
-          <p>Known as: Mariam Al-Astrolabiya.</p>
-          <p>Contributions to: Mathematics and science</p>
-          <p>Further information: <a href="https://www.whyislam.org/astrolabes-and-early-islam-mariam-al-astrolabiya-al-ijliya/" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
+  <div class="modal-overlay" id="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close" id="modal-close">
+        <i class="fas fa-times"></i>
+      </button>
+      <div class="modal-body" id="modal-body">
       </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Sutayta Al mahamali.png" alt="Sutayta Al-mahamali">
-        <div class="scholar-name">Sutayta Al-mahamali</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Sutayta Al-Mahamali stands out as a remarkable figure in the history of science, who was known for mathematical prowess.</p>
-          <p>Lived between: 930-987</p>
-          <p>Known as: an expert witness in courts.</p>
-          <p>Contributions to: Mathematics and Jurisprudence</p>
-          <p>Further information: <a href="https://www.muslimwomenyoushouldknow.com/sutayta-almahamali" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Jabir ibn Hayyan.png" alt="Jabir ibn Hayyan (Geber)">
-        <div class="scholar-name">Jabir ibn Hayyan</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">"The father of chemistry". Known for founding modern chemistry; pioneering laboratory techniques; authoring influential works on alchemy and science</p>
-          <p>Lived between: 721–815 CE</p>
-          <p>No. of books written: 300+ on philosophy, 1,300 on mechanical devices, and hundreds on alchemy</p>
-          <p>Contributions to: Chemistry, alchemy, medicine, pharmacy, philosophy, astronomy, mathematics, physics, scientific methodology</p>
-          <p>Further information: <a href="https://en.wikipedia.org/wiki/Jabir_ibn_Hayyan" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Ibn Rushd (Averroes).png" alt="Ibn Rushd">
-        <div class="scholar-name">Ibn Rushd</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Ibn rushd was a renowned physician and influenced the progress of medicine by his writings.</p>
-          <p>Lived between: 1126–1198 CE</p>
-          <p>No. of books written: Over 100</p>
-          <p>Contributions to: Philosophy, Medicine, Islamic law, Logic, Astronomy, Mathematics, Physics, Psychology and Linguistics</p>
-          <p>Further information: <a href="Stanford Encyclopedia of Philosophy: Ibn Rushd (Averroes)" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Ibn Sina (Avicenna).png" alt="Ibn Sina (Avicenna)">
-        <div class="scholar-name">Ibn Sina</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Known in the West as Avicenna, is one of history’s most influential scholars, especially in medicine and philosophy.</p>
-          <p>Lived between: 980–1037 CE</p>
-          <p>No. of books written: 131 to over 450</p>
-          <p>Contributions to: Medicine, Philosophy, Psychology, Mathematics, Astronomy, Physics, Music, Logic, Literature, Pharmacology, Ethics</p>
-          <p>Further information: <a href="https://en.wikipedia.org/wiki/Avicenna" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-  </tr>
-</table>
-
-<table>
-  <tr>
-    <td>
-      <div class="scholar-cell">
-        <img src="Abu al Qasim al Zahrawi (Albucasis).png" alt="Abu al-Qasim al-Zahrawi">
-        <div class="scholar-name">Abu al-Qasim al-Zahrawi</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Abu al-Qasim al-Zahrawi is most famous for his foundational contributions to surgery and medicine during the Islamic Golden Age. </p>
-          <p>Lived between: 936–1013 CE</p>
-          <p>No. of books written: 1</p>
-          <p>Contributions to: Surgery, Medicine, Pharmacy, Pharmacology, Dentistry, Orthopedics, Neurosurgery, Nermatology and Psychiatry</p>
-          <p>Further information: <a href="https://en.wikipedia.org/wiki/Al-Zahrawi" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Al Biruni.png" alt="Al-Biruni">
-        <div class="scholar-name">Al-Biruni</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Al-Biruni is most famous for groundbreaking work in astronomy, foundational work in spherical trigonometry and a comparative study of India.</p>
-          <p>Lived between: 973–1048 CE</p>
-          <p>No. of books written: Over 100–150</p>
-          <p>Contributions to: Astronomy, Mathematics, Geography, Geology, Mineralogy, Physics, Pharmacy, Anthropology, History and Philosophy</p>
-          <p>Further information: <a href="https://en.wikipedia.org/wiki/Al-Biruni" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Hunayn ibn Ishaq.png" alt="Hunayn ibn Ishaq">
-        <div class="scholar-name">Hunayn ibn Ishaq</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Hunayn ibn Ishaq is known to be a master translator and physician of the Islamic Golden Age.</p>
-          <p>Lived between: 809–873 or 877 CE</p>
-          <p>No. of books written: 300</p>
-          <p>Contributions: Medicine, Translation studies, Philosophy, Astronomy, Mathematics, Lexicography, Pharmacology</p>
-          <p>Further information: <a href="https://en.wikipedia.org/wiki/Hunayn_ibn_Ishaq" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Alhazen.png" alt="Alhazen (Ibn al-Haytham)">
-        <div class="scholar-name">Alhazen (Ibn al-Haytham)</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Authored the influential "Book of Optics" (Kitab al-Manazir); pioneering experimental scientific method; major advances in vision science and mathematics</p>
-          <p>Lived between: 965–c. 1040/1041 CE</p>
-          <p>No. of books written: Attributed with over 200 works; about 96 known, 50 extant, 14 on optics</p>
-          <p>Contributions to: Optics, mathematics, astronomy, physics, philosophy, medicine, engineering, psychology</p>
-          <p>Further information: <a href="https://en.wikipedia.org/wiki/Ibn_al-Haytham" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-    <td>
-      <div class="scholar-cell">
-        <img src="Ibn Khaldun.png" alt="Ibn Khaldun">
-        <div class="scholar-name">Ibn Khaldun</div>
-        <div class="stats-popup">
-          <p class="scholar-caption">Foundational Thinker in Sociology, History, and Economics</p>
-          <p>Lived between: 1332–1406 CE (1 Ramadan 732 AH – 25 Ramadan 808 AH)</p>
-          <p>No. of books written:5–6 distinct works securely attributed to him.</p>
-          <p>Contributions to: Sociology, History, Economics, Political science, Philosophy, Education, Communication, Historiography, Religious studies</p>
-          <p>Further information: <a href="https://en.wikipedia.org/wiki/Ibn_Khaldun" target="_blank" rel="noopener noreferrer">Here</a> </p>
-        </div>
-      </div>
-    </td>
-  </tr>
-</table>
+    </div>
+  </div>
 
 <footer><p>Developed by: Sameehaa Gathoo, Ilhaam Rauff, Zayan Ismail, Hamzah Abrahams, Muhammed Pochee, Zahra Bhamjee, Muhammad Bhamjee, Zayd Mayet & Muallimah Shaz</p></footer>
+<script>
+  
+    const scholars = [
+      {
+        id: 1,
+        name: "Fatima al-Fihri",
+        dates: "800-880 CE",
+        image: "Fatima al Fihri.png",
+        caption: "Fatima al-Fihri is the founder of the world's first university Al-Qarawiyyin university.",
+        fullDetails: "Fatima al-Fihri was a Muslim Arab woman who is credited with founding the University of Al Quaraouiyine in Fez, Morocco in 859 CE. This institution is considered by many to be the oldest existing, continually operating higher educational institution in the world.",
+        contributions: ["Mathematics", "Education", "Architecture"],
+        books: "N/A",
+        tags: ["mathematics", "education"],
+        furtherInfo: "https://www.muslimwomenmathematicians.org/",
+        century: "9th"
+      },
+      {
+        id: 2,
+        name: "Abbas ibn Firnas",
+        dates: "810–887 CE",
+        image: "Abbas ibn Firnas.png",
+        caption: "Early aviation experiments (glider flight), invention, scientific instruments, and mechanical devices",
+        fullDetails: "Abbas Ibn Firnas was an Andalusian polymath: an inventor, physician, chemist, engineer, musician, and poet. He is best known for an early attempt at aviation, where he constructed a winged apparatus and attempted to fly.",
+        contributions: ["Engineering", "Physics", "Astronomy", "Chemistry", "Music", "Poetry"],
+        books: "Multiple treatises",
+        tags: ["engineering", "astronomy", "physics", "chemistry"],
+        furtherInfo: "https://en.wikipedia.org/wiki/Abbas_ibn_Firnas",
+        century: "9th"
+      },
+      {
+        id: 3,
+        name: "Al Khwarizmi",
+        dates: "780–850 CE",
+        image: "Al Khwarizmi.png",
+        caption: "\"The father of algebra\". He is most famous for founding algebra, developing algorithms and introducing Hindu-Arabic numerals.",
+        fullDetails: "Muhammad ibn Musa al-Khwarizmi was a Persian mathematician, astronomer, and geographer. He is often referred to as 'the father of algebra', a title derived from his book 'Al-Kitab al-Mukhtasar fi Hisab al-Jabr wal-Muqabala'.",
+        contributions: ["Mathematics", "Astronomy", "Geography", "Algorithmics"],
+        books: "9",
+        tags: ["mathematics", "astronomy"],
+        furtherInfo: "https://mathshistory.st-andrews.ac.uk/Biographies/Al-Khwarizmi/",
+        century: "9th"
+      },
+      {
+        id: 4,
+        name: "Abu Bakr Muhammad ibn Zakariya al-Razi",
+        dates: "865–925 CE",
+        image: "Abu Bakr Al razi.png",
+        caption: "Abu Bakr Al-razi is known for distinguishing smallpox from measles, founding the first psychiatric ward, medical encyclopedias and innovations in chemistry and medicine.",
+        fullDetails: "Abu Bakr Muhammad ibn Zakariya al-Razi was a Persian physician, philosopher, and alchemist. He is considered one of the most important figures in the history of medicine. Al-Razi made fundamental and enduring contributions to medicine, chemistry, and philosophy.",
+        contributions: ["Medicine", "Chemistry", "Philosophy", "Psychiatry", "Pharmacology"],
+        books: "184-237",
+        tags: ["medicine", "chemistry", "philosophy"],
+        furtherInfo: "https://en.wikipedia.org/wiki/Abu_Bakr_al-Razi",
+        century: "9th"
+      },
+      {
+        id: 5,
+        name: "Sulayman Al Kindi",
+        dates: "801–873 CE",
+        image: "Sulaymaan Al Kindi.png",
+        caption: "Al-Kindi is celebrated as the first major Arab philosopher and a pioneering polymath and is also known as the \"Philosopher of the Arabs\"",
+        fullDetails: "Abu Yusuf Ya'qub ibn Ishaq al-Kindi was an Arab Muslim philosopher, polymath, mathematician, physician, and musician. Al-Kindi was the first of the Muslim peripatetic philosophers and is known for his efforts to introduce Greek and Hellenistic philosophy to the Arab world.",
+        contributions: ["Philosophy", "Mathematics", "Medicine", "Cryptography", "Music Theory"],
+        books: "Over 270",
+        tags: ["philosophy", "mathematics", "medicine"],
+        furtherInfo: "https://en.wikipedia.org/wiki/Al-Kindi",
+        century: "9th"
+      },
+      {
+        id: 6,
+        name: "Al-Farabi",
+        dates: "870-950 CE",
+        image: "Al Farabi.png",
+        caption: "Al-Farabi had great influence on science and philosophy for several centuries, and was widely considered second only to Aristotle in knowledge.",
+        fullDetails: "Abu Nasr al-Farabi was a renowned philosopher and jurist who wrote in the fields of political philosophy, metaphysics, ethics, and logic. He was also a scientist, cosmologist, mathematician, and music theorist.",
+        contributions: ["Philosophy", "Political Science", "Music Theory", "Logic", "Metaphysics"],
+        books: "72",
+        tags: ["philosophy", "political science", "music"],
+        furtherInfo: "https://plato.stanford.edu/entries/al-farabi/",
+        century: "10th"
+      },
+      {
+        id: 7,
+        name: "Ismail al-Jazari",
+        dates: "1136–1206 CE",
+        image: "Ismail al jazari.png",
+        caption: "Ismail al-Jazari is celebrated as one of the most influential engineers and inventors of the medieval Islamic world, particularly known for his pioneering work in mechanical engineering, robotics, and automation.",
+        fullDetails: "Badīʿ az-Zaman Abu l-ʿIzz ibn Ismāʿīl ibn ar-Razāz al-Jazarī was a Muslim polymath: a scholar, inventor, mechanical engineer, artisan, artist, and mathematician. He is best known for writing 'The Book of Knowledge of Ingenious Mechanical Devices'.",
+        contributions: ["Mechanical Engineering", "Robotics", "Hydraulics", "Automata"],
+        books: "1 (but highly influential)",
+        tags: ["engineering", "robotics", "automation"],
+        furtherInfo: "https://en.wikipedia.org/wiki/Al-Jazari",
+        century: "12th"
+      },
+      {
+        id: 8,
+        name: "Ibn al-Nafis",
+        dates: "1210–1288 CE",
+        image: "Ibn al Nafis.png",
+        caption: "Ibn al-Nafis is known for discovering the pulmonary circulation of blood.",
+        fullDetails: "Ala-al-din abu Al-Hassan Ali ibn Abi-Hazm al-Qarshi al-Dimashqi, known as Ibn al-Nafis, was an Arab physician who made several important contributions to the early knowledge of pulmonary circulation.",
+        contributions: ["Medicine", "Anatomy", "Physiology", "Cardiology"],
+        books: "110",
+        tags: ["medicine", "anatomy", "physiology"],
+        furtherInfo: "https://muslimheritage.com/people/scholars/ibn-al-nafis-2/",
+        century: "13th"
+      },
+      {
+        id: 9,
+        name: "Yahya ibn Adi",
+        dates: "893–974 CE",
+        image: "Yahya ibn Adi.png",
+        caption: "Yahya ibn ʿAdi was a leading Christian philosopher, translator, and logician known for his influential works on philosophy, ethics, and the transmission of Greek thought into Arabic.",
+        fullDetails: "Yahya ibn ʿAdi was a leading Christian philosopher, translator, and logician known for his influential works on philosophy, ethics, and the transmission of Greek thought into Arabic.",
+        contributions: ["Philosophy", "Logic", "Theology", "Translation movement", "Intellectual education"],
+        books: "20–25",
+        tags: ["philosophy", "logic", "theology"],
+        furtherInfo: "https://plato.stanford.edu/entries/yahya-adi/",
+        century: "10th"
+      },
+      {
+        id: 10,
+        name: "Omar Khayyam",
+        dates: "1048-1131 CE",
+        image: "Omar Khayyam.png",
+        caption: "Omar Khayyam was a renowned Persian mathematician and astronomer, famous for his work on cubic equations and calendar reform and celebrated for his philosophical poetry.",
+        fullDetails: "Ghiyath al-Din Abu'l-Fath Umar ibn Ibrahim al-Nisaburi al-Khayyami, known as Omar Khayyam, was a Persian polymath, mathematician, astronomer, philosopher, and poet.",
+        contributions: ["Mathematics", "Astronomy", "Poetry", "Philosophy"],
+        books: "10-15",
+        tags: ["mathematics", "astronomy", "poetry"],
+        furtherInfo: "https://www.britannica.com/biography/Omar-Khayyam-Persian-poet-and-astronomer",
+        century: "11th"
+      },
+      {
+        id: 11,
+        name: "Mariam al-Ijliya",
+        dates: "910-unknown",
+        image: "Mariam al Ijliya.png",
+        caption: "Mariam al-Ijliya was a pioneering instrument maker, famed for crafting intricate astrolabes and breaking gender barriers in medieval science.",
+        fullDetails: "Mariam al-Ijliya was a pioneering instrument maker, famed for crafting intricate astrolabes and breaking gender barriers in medieval science.",
+        contributions: ["Mathematics", "Science", "Instrument making"],
+        books: "Unknown",
+        tags: ["mathematics", "astronomy"],
+        furtherInfo: "https://www.whyislam.org/astrolabes-and-early-islam-mariam-al-astrolabiya-al-ijliya/",
+        century: "10th"
+      },
+      {
+        id: 12,
+        name: "Sutayta Al-mahamali",
+        dates: "930-987",
+        image: "Sutayta Al mahamali.png",
+        caption: "Sutayta Al-Mahamali stands out as a remarkable figure in the history of science, who was known for mathematical prowess.",
+        fullDetails: "Sutayta Al-Mahamali stands out as a remarkable figure in the history of science, who was known for mathematical prowess.",
+        contributions: ["Mathematics", "Jurisprudence"],
+        books: "Unknown",
+        tags: ["mathematics"],
+        furtherInfo: "https://www.muslimwomenyoushouldknow.com/sutayta-almahamali",
+        century: "10th"
+      },
+      {
+        id: 13,
+        name: "Jabir ibn Hayyan",
+        dates: "721–815 CE",
+        image: "Jabir ibn Hayyan.png",
+        caption: "\"The father of chemistry\". Known for founding modern chemistry; pioneering laboratory techniques; authoring influential works on alchemy and science",
+        fullDetails: "Abu Musa Jabir ibn Hayyan, often known as Geber in Europe, was a prominent polymath: a chemist, alchemist, astronomer, astrologer, engineer, geographer, philosopher, physicist, and pharmacist.",
+        contributions: ["Chemistry", "Alchemy", "Medicine", "Philosophy", "Astronomy"],
+        books: "Over 3,000 (attributed)",
+        tags: ["chemistry", "alchemy", "medicine"],
+        furtherInfo: "https://en.wikipedia.org/wiki/Jabir_ibn_Hayyan",
+        century: "8th"
+      },
+      {
+        id: 14,
+        name: "Ibn Rushd",
+        dates: "1126–1198 CE",
+        image: "Ibn Rushd (Averroes).png",
+        caption: "Ibn rushd was a renowned physician and influenced the progress of medicine by his writings.",
+        fullDetails: "Ibn rushd was a renowned physician and influenced the progress of medicine by his writings.",
+        contributions: ["Philosophy", "Medicine", "Islamic law", "Logic", "Astronomy", "Mathematics", "Physics", "Psychology", "Linguistics"],
+        books: "Over 100",
+        tags: ["philosophy", "medicine"],
+        furtherInfo: "https://plato.stanford.edu/entries/ibn-rushd/",
+        century: "12th"
+      },
+      {
+        id: 15,
+        name: "Ibn Sina",
+        dates: "980–1037 CE",
+        image: "Ibn Sina (Avicenna).png",
+        caption: "Known in the West as Avicenna, is one of history’s most influential scholars, especially in medicine and philosophy.",
+        fullDetails: "Known in the West as Avicenna, is one of history’s most influential scholars, especially in medicine and philosophy.",
+        contributions: ["Medicine", "Philosophy", "Psychology", "Mathematics", "Astronomy", "Physics", "Music", "Logic", "Literature", "Pharmacology", "Ethics"],
+        books: "131 to over 450",
+        tags: ["medicine", "philosophy"],
+        furtherInfo: "https://en.wikipedia.org/wiki/Avicenna",
+        century: "11th"
+      },
+      {
+        id: 16,
+        name: "Abu al-Qasim al-Zahrawi",
+        dates: "936–1013 CE",
+        image: "Abu al Qasim al Zahrawi (Albucasis).png",
+        caption: "Abu al-Qasim al-Zahrawi is most famous for his foundational contributions to surgery and medicine during the Islamic Golden Age.",
+        fullDetails: "Abu al-Qasim al-Zahrawi is most famous for his foundational contributions to surgery and medicine during the Islamic Golden Age.",
+        contributions: ["Surgery", "Medicine", "Pharmacy", "Pharmacology", "Dentistry", "Orthopedics", "Neurosurgery", "Dermatology", "Psychiatry"],
+        books: "1",
+        tags: ["medicine", "surgery"],
+        furtherInfo: "https://en.wikipedia.org/wiki/Al-Zahrawi",
+        century: "10th"
+      },
+      {
+        id: 17,
+        name: "Al-Biruni",
+        dates: "973–1048 CE",
+        image: "Al Biruni.png",
+        caption: "Al-Biruni is most famous for groundbreaking work in astronomy, foundational work in spherical trigonometry and a comparative study of India.",
+        fullDetails: "Al-Biruni is most famous for groundbreaking work in astronomy, foundational work in spherical trigonometry and a comparative study of India.",
+        contributions: ["Astronomy", "Mathematics", "Geography", "Geology", "Mineralogy", "Physics", "Pharmacy", "Anthropology", "History", "Philosophy"],
+        books: "Over 100–150",
+        tags: ["astronomy", "mathematics", "geography"],
+        furtherInfo: "https://en.wikipedia.org/wiki/Al-Biruni",
+        century: "11th"
+      },
+      {
+        id: 18,
+        name: "Hunayn ibn Ishaq",
+        dates: "809–873 or 877 CE",
+        image: "Hunayn ibn Ishaq.png",
+        caption: "Hunayn ibn Ishaq is known to be a master translator and physician of the Islamic Golden Age.",
+        fullDetails: "Hunayn ibn Ishaq is known to be a master translator and physician of the Islamic Golden Age.",
+        contributions: ["Medicine", "Translation studies", "Philosophy", "Astronomy", "Mathematics", "Lexicography", "Pharmacology"],
+        books: "300",
+        tags: ["medicine", "philosophy"],
+        furtherInfo: "https://en.wikipedia.org/wiki/Hunayn_ibn_Ishaq",
+        century: "9th"
+      },
+      {
+        id: 19,
+        name: "Alhazen (Ibn al-Haytham)",
+        dates: "965–c. 1040/1041 CE",
+        image: "Alhazen.png",
+        caption: "Authored the influential 'Book of Optics' (Kitab al-Manazir); pioneering experimental scientific method; major advances in vision science and mathematics",
+        fullDetails: "Authored the influential 'Book of Optics' (Kitab al-Manazir); pioneering experimental scientific method; major advances in vision science and mathematics",
+        contributions: ["Optics", "Mathematics", "Astronomy", "Physics", "Philosophy", "Medicine", "Engineering", "Psychology"],
+        books: "Attributed with over 200 works; about 96 known, 50 extant, 14 on optics",
+        tags: ["optics", "physics", "mathematics"],
+        furtherInfo: "https://en.wikipedia.org/wiki/Ibn_al-Haytham",
+        century: "11th"
+      },
+      {
+        id: 20,
+        name: "Ibn Khaldun",
+        dates: "1332–1406 CE",
+        image: "Ibn Khaldun.png",
+        caption: "Foundational Thinker in Sociology, History, and Economics",
+        fullDetails: "Foundational Thinker in Sociology, History, and Economics",
+        contributions: ["Sociology", "History", "Economics", "Political science", "Philosophy", "Education", "Communication", "Historiography", "Religious studies"],
+        books: "5–6 distinct works securely attributed to him",
+        tags: ["sociology", "history", "economics"],
+        furtherInfo: "https://en.wikipedia.org/wiki/Ibn_Khaldun",
+        century: "14th"
+      }
+    ];
 
+    // DOM Elements
+    const tablesContainer = document.getElementById('scholars-tables-container');
+    const modalOverlay = document.getElementById('modal-overlay');
+    const modalBody = document.getElementById('modal-body');
+    const modalClose = document.getElementById('modal-close');
+    const searchBox = document.getElementById('search-box');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const timelineMarkers = document.querySelectorAll('.timeline-marker');
+
+    // Timeline markers click - filter by century
+document.querySelectorAll('.timeline-marker').forEach(marker => {
+  marker.addEventListener('click', function() {
+    const century = this.getAttribute('data-century');
+    
+    if (century) {
+      let filtered = [];
+      
+      // Handle different century ranges
+      if (century === '8th') {
+        filtered = scholars.filter(s => s.century === '8th');
+      } else if (century === '9th-10th') {
+        filtered = scholars.filter(s => s.century === '9th' || s.century === '10th');
+      } else if (century === '11th') {
+        filtered = scholars.filter(s => s.century === '11th');
+      } else if (century === '12th-13th') {
+        filtered = scholars.filter(s => s.century === '12th' || s.century === '13th');
+      } else if (century === '14th-15th') {
+        filtered = scholars.filter(s => s.century === '14th');
+      }
+      
+      renderOriginalTableLayout(filtered);
+      
+      // Update active filter button
+      filterBtns.forEach(b => b.classList.remove('active'));
+      document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+      
+      // Optional: Show message about filter
+      console.log(`Showing scholars from ${century} century`);
+    }
+  });
+});
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', function() {
+      renderOriginalTableLayout(scholars);
+      setupEventListeners();
+    });
+
+    // RENDER EXACT ORIGINAL TABLE LAYOUT
+    function renderOriginalTableLayout(scholarsArray) {
+      // Clear container
+      tablesContainer.innerHTML = '';
+      
+      // Group scholars into rows of 5 
+      const rows = [];
+      for (let i = 0; i < scholarsArray.length; i += 5) {
+        rows.push(scholarsArray.slice(i, i + 5));
+      }
+      
+      // Create tables exactly like the original
+      rows.forEach((rowScholars, index) => {
+        const table = document.createElement('table');
+        
+        // Add caption to first table only
+        if (index === 0) {
+          const caption = document.createElement('caption');
+          caption.textContent = '750-1492 CE';
+          table.appendChild(caption);
+        }
+        
+        const tr = document.createElement('tr');
+        
+        rowScholars.forEach(scholar => {
+          const td = document.createElement('td');
+          
+          // Create scholar-cell div
+          const scholarCell = document.createElement('div');
+          scholarCell.className = 'scholar-cell';
+          scholarCell.dataset.id = scholar.id;
+          scholarCell.dataset.tags = scholar.tags.join(' ');
+          
+          // Add image
+          const img = document.createElement('img');
+          img.src = scholar.image;
+          img.alt = scholar.name;
+          
+          // Add name div
+          const nameDiv = document.createElement('div');
+          nameDiv.className = 'scholar-name';
+          nameDiv.textContent = scholar.name;
+          
+          // Add stats-popup
+          const statsPopup = document.createElement('div');
+          statsPopup.className = 'stats-popup';
+          
+          // Build popup content 
+let popupHTML = `<p class="scholar-caption">${scholar.caption}</p>`;
+
+// Wrap all additional info in a div that will be hidden on hover
+popupHTML += `<div class="additional-info" style="display: none;">`;
+popupHTML += `<p>Lived between: ${scholar.dates}</p>`;
+
+// Add known as if exists (for specific scholars)
+if (scholar.name.includes('Fatima')) {
+  popupHTML += `<p>Known as: "Umm Al-Banayn" ("Mother of Sons")</p>`;
+} else if (scholar.name.includes('Abbas')) {
+  popupHTML += `<p>Known as: "The father of Aviation"</p>`;
+} else if (scholar.name.includes('Mariam')) {
+  popupHTML += `<p>Known as: Mariam Al-Astrolabiya.</p>`;
+} else if (scholar.name.includes('Sutayta')) {
+  popupHTML += `<p>Known as: an expert witness in courts.</p>`;
+}
+
+// Add books info if available
+if (scholar.books && scholar.books !== 'N/A' && scholar.books !== 'Unknown') {
+  popupHTML += `<p>No. of books written: ${scholar.books}</p>`;
+}
+
+// Add contributions
+popupHTML += `<p>Contributions to: ${scholar.contributions.join(', ')}</p>`;
+
+// Add further information link
+popupHTML += `<p>Further information: <a href="${scholar.furtherInfo}" target="_blank" rel="noopener noreferrer">Here</a> </p>`;
+popupHTML += `</div>`; // Close the additional-info div
+          
+          statsPopup.innerHTML = popupHTML;
+          
+          // Assemble the card
+          scholarCell.appendChild(img);
+          scholarCell.appendChild(nameDiv);
+          scholarCell.appendChild(statsPopup);
+          
+          td.appendChild(scholarCell);
+          tr.appendChild(td);
+        });
+        
+        table.appendChild(tr);
+        tablesContainer.appendChild(table);
+      });
+      
+      // Reattach click listeners to scholar cells
+      document.querySelectorAll('.scholar-cell').forEach(cell => {
+        cell.addEventListener('click', function(e) {
+          // Don't open modal if clicking on a link
+          if (e.target.tagName === 'A') return;
+          
+          const scholarId = parseInt(this.dataset.id);
+          openScholarModal(scholarId);
+        });
+      });
+    }
+
+    // Open modal with ALL scholar details
+function openScholarModal(scholarId) {
+  const scholar = scholars.find(s => s.id === scholarId);
+  
+  if (!scholar) return;
+  
+  // Build the "Known as" section based on scholar name
+  let knownAsHTML = '';
+  if (scholar.name.includes('Fatima')) {
+    knownAsHTML = `<p><strong>Known as:</strong> "Umm Al-Banayn" ("Mother of Sons")</p>`;
+  } else if (scholar.name.includes('Abbas')) {
+    knownAsHTML = `<p><strong>Known as:</strong> "The father of Aviation"</p>`;
+  } else if (scholar.name.includes('Mariam')) {
+    knownAsHTML = `<p><strong>Known as:</strong> Mariam Al-Astrolabiya</p>`;
+  } else if (scholar.name.includes('Sutayta')) {
+    knownAsHTML = `<p><strong>Known as:</strong> an expert witness in courts</p>`;
+  }
+  
+  modalBody.innerHTML = `
+    <div class="modal-header">
+      <img src="${scholar.image}" alt="${scholar.name}" class="modal-image">
+      <div>
+        <h2 class="modal-title">${scholar.name}</h2>
+        <div class="modal-subtitle">${scholar.dates}</div>
+        <p class="modal-text">${scholar.fullDetails}</p>
+      </div>
+    </div>
+    
+    <!-- Quick Facts Section (from code 1 hover popup) -->
+    <div style="background: rgba(210, 172, 71, 0.1); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #D2AC47;">
+      <h3 style="color: #D2AC47; margin-top: 0; margin-bottom: 15px;">📋 Quick Facts</h3>
+      <p><strong>Lived between:</strong> ${scholar.dates}</p>
+      ${knownAsHTML}
+      <p><strong>Books written:</strong> ${scholar.books}</p>
+    </div>
+    
+    <div class="modal-contributions">
+      <h3>🔬 Key Contributions</h3>
+      <div class="contributions-list">
+        ${scholar.contributions.map(contribution => 
+          `<span class="contribution-item">${contribution}</span>`
+        ).join('')}
+      </div>
+    </div>
+    
+    
+    
+    <div style="margin-top: 25px;">
+      <h3 style="color: #D2AC47;">🔗 Learn More</h3>
+      <p style="margin: 0;">
+        <a href="${scholar.furtherInfo}" target="_blank" style="color: #D2AC47; text-decoration: underline; display: inline-flex; align-items: center; gap: 5px;">
+          <i class="fas fa-external-link-alt"></i> Read more about ${scholar.name}
+        </a>
+      </p>
+    </div>
+  `;
+  
+  modalOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+    // Close modal
+    function closeModal() {
+      modalOverlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Filter scholars
+    function filterScholars(filter) {
+      if (filter === 'all') {
+        renderOriginalTableLayout(scholars);
+        return;
+      }
+      
+      const filtered = scholars.filter(scholar => 
+        scholar.tags.includes(filter) || 
+        scholar.contributions.some(cont => 
+          cont.toLowerCase().includes(filter)
+        )
+      );
+      
+      if (filtered.length === 0) {
+        tablesContainer.innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px;"></i>
+            <h3>No scholars found in this category</h3>
+            <p>Try selecting a different filter</p>
+          </div>
+        `;
+      } else {
+        renderOriginalTableLayout(filtered);
+      }
+    }
+
+    // Search scholars
+    function searchScholars(searchTerm) {
+      if (searchTerm === '') {
+        const activeFilter = document.querySelector('.filter-btn.active').getAttribute('data-filter');
+        filterScholars(activeFilter);
+        return;
+      }
+      
+      const filtered = scholars.filter(scholar => 
+        scholar.name.toLowerCase().includes(searchTerm) ||
+        scholar.caption.toLowerCase().includes(searchTerm) ||
+        scholar.contributions.some(cont => cont.toLowerCase().includes(searchTerm)) ||
+        scholar.tags.some(tag => tag.toLowerCase().includes(searchTerm))
+      );
+      
+      if (filtered.length === 0) {
+        tablesContainer.innerHTML = `
+          <div class="no-results">
+            <i class="fas fa-search" style="font-size: 3rem; margin-bottom: 20px;"></i>
+            <h3>No scholars found for "${searchTerm}"</h3>
+            <p>Try a different search term</p>
+          </div>
+        `;
+      } else {
+        renderOriginalTableLayout(filtered);
+      }
+    }
+
+    // Setup all event listeners
+    function setupEventListeners() {
+      // Modal close
+      modalClose.addEventListener('click', closeModal);
+      modalOverlay.addEventListener('click', function(e) {
+        if (e.target === modalOverlay) {
+          closeModal();
+        }
+      });
+      
+      // Escape key to close modal
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && modalOverlay.classList.contains('active')) {
+          closeModal();
+        }
+      });
+      
+      // Filter buttons
+      filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+          filterBtns.forEach(b => b.classList.remove('active'));
+          this.classList.add('active');
+          
+          const filter = this.getAttribute('data-filter');
+          filterScholars(filter);
+        });
+      });
+      
+      // Search box
+      searchBox.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+        searchScholars(searchTerm);
+      });
+      
+      // Timeline markers
+      timelineMarkers.forEach(marker => {
+        marker.addEventListener('click', function() {
+          const label = this.querySelector('.timeline-label').textContent;
+          
+          // Extract century from label
+          let century = '';
+          if (label.includes('8th')) century = '8th';
+          else if (label.includes('9th')) century = '9th';
+          else if (label.includes('10th')) century = '10th';
+          else if (label.includes('11th')) century = '11th';
+          else if (label.includes('12th')) century = '12th';
+          else if (label.includes('13th')) century = '13th';
+          else if (label.includes('14th')) century = '14th';
+          
+          if (century) {
+            const filtered = scholars.filter(s => s.century === century);
+            renderOriginalTableLayout(filtered);
+            
+            // Update active filter button
+            filterBtns.forEach(b => b.classList.remove('active'));
+            document.querySelector('.filter-btn[data-filter="all"]').classList.add('active');
+          }
+        });
+      });
+    }
+  </script>
 </body>
 </html>
